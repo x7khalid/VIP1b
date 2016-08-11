@@ -34,7 +34,7 @@ class Main extends PluginBase implement Listener{
           $this->getConfig()->set("Z", $z);
           $this->getConfig()->set("Level", $level);
           $this->getConfig()->save();
-          $sender->SendMessage("New set Block Back Player No VIP");
+          $sender->SendMessage("New set Block Back Player do not have VIP");
         }
       break;
       case "sbr":
