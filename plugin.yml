@@ -3,9 +3,10 @@ Main: iBa4x\VIP\Main
 version: 1.0.0
 api: [2.0.0]
 auther: iBa4x
+website: https://github.com/iBa4x/VIP1b
 
 commands:
    sbb:
-     description: set teleport player no vip.
+     description: set teleport player do not have vip.
    sbr:
      description: set block join vip.
