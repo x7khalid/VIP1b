@@ -1,1 +1,12 @@
-
+# xyz level block tp player do not have vip.
+X: 
+Y: 
+Z: 
+Level: 
+# xyz block join player vip room.
+XM: 
+YM: 
+ZM: 
+# message and popoup player do not have vip!
+msg: 
+popup: 
