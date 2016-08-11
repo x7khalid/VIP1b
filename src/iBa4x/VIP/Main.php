@@ -56,6 +56,49 @@ class Main extends PluginBase implement Listener{
     }
   }
   public function onMove(PlayerMoveEvent $event){
-    
+    $XM = $this->getConfig()->get("XM");
+    $YM = $this->getConfig()->get("YM");
+    $ZM = $this->getConfig()->get("ZM");
+    $msg = $this->getConfig()->get("msg");
+    $pop = $this->getConfig()->get("popup");
+    if($event->getTo()getFloorX() === $XM){
+      if($event->getTo()getFloorY() === $YX){
+        if($event->getTo()getFloorZ() === $ZM){
+          $x = $this->getConfig()->get("X");
+          $y = $this->getConfig()->get("Y");
+          $z = $this->getConfig()->get("Z");
+          $level = $this->getConfig()->get("Level");
+          $player = $event->getPlayer();
+          if($player->hasPermission("vip1b.move.vip")){
+            $player->sendPopup(T::YELLOW . "Welcom" . $player->getName());
+          }else{
+            $player->teleport(new Vector3($x, $y+1, $z, $level));
+            $player->sendPopup(T::YELLOW . "$pop");
+            $player->sendMessage(T::RED . "$msg");
+          }
+        }
+      }
+    }
+    if($event->getTo()getFloorX() === $XM){
+      if($event->getTo()getFloorY() === $YX+1){
+        if($event->getTo()getFloorZ() === $ZM){
+          $x = $this->getConfig()->get("X");
+          $y = $this->getConfig()->get("Y");
+          $z = $this->getConfig()->get("Z");
+          $level = $this->getConfig()->get("Level");
+          $player = $event->getPlayer();
+          if($player->hasPermission("vip1b.move.vip")){
+            $player->sendPopup(T::YELLOW . "Welcom" . $player->getName());
+          }else{
+            $player->teleport(new Vector3($x, $y+1, $z, $level));
+            $player->sendPopup(T::YELLOW . "$pop");
+            $player->sendMessage(T::RED . "$msg");
+          }
+        }
+      }
+    }
+  }
+  public function onDisable(){
+    $this->getConfig->save();
   }
 }
