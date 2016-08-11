@@ -13,10 +13,10 @@ use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as T;
 
-class Main extends PluginBase implement Listener{
+class Main extends PluginBase implements Listener{
   public function onEneble(){
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
-    $this->getLogger->info(T::GREEN . "By iBa4x");
+    $this->getLogger()->info(T::GREEN . "By iBa4x");
     $this->seveDefaultConfig();
     $this->getResource("Config.yml");
   }
@@ -63,9 +63,9 @@ class Main extends PluginBase implement Listener{
     $ZM = $this->getConfig()->get("ZM");
     $msg = $this->getConfig()->get("msg");
     $pop = $this->getConfig()->get("popup");
-    if($event->getTo()getFloorX() === $XM){
-      if($event->getTo()getFloorY() === $YX){
-        if($event->getTo()getFloorZ() === $ZM){
+    if($event->getTo()->getFloorX() === $XM){
+      if($event->getTo()->getFloorY() === $YM){
+        if($event->getTo()->getFloorZ() === $ZM){
           $x = $this->getConfig()->get("X");
           $y = $this->getConfig()->get("Y");
           $z = $this->getConfig()->get("Z");
@@ -81,9 +81,9 @@ class Main extends PluginBase implement Listener{
         }
       }
     }
-    if($event->getTo()getFloorX() === $XM){
-      if($event->getTo()getFloorY() === $YX+1){
-        if($event->getTo()getFloorZ() === $ZM){
+    if($event->getTo()->getFloorX() === $XM){
+      if($event->getTo()->getFloorY() === $YM+1){
+        if($event->getTo()->getFloorZ() === $ZM){
           $x = $this->getConfig()->get("X");
           $y = $this->getConfig()->get("Y");
           $z = $this->getConfig()->get("Z");
