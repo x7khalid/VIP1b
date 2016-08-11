@@ -50,7 +50,9 @@ class Main extends PluginBase implement Listener{
           $this->getConfig()->set("msg", "You do not have Permission");
           $this->getConfig()->set("popup", " ");
           $this->getConfig()->save();
-          $sender->SendMessage("New set Block Join VIP");
+          $sender->sendMessage("New set Block Join VIP");
+          $sender->sendMessage(T::RED . "#Permission Join VIP");
+          $sender->sendMessage(T::YELLOW . "vip1b.move.vip");
         }
       break;
     }
