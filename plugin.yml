@@ -7,6 +7,8 @@ website: https://github.com/iBa4x/VIP1b
 
 commands:
    sbb:
+     permission: vip1b.command.sbb
      description: set teleport player do not have vip.
    sbr:
+     permission: vip1b.command.sbr
      description: set block join vip.
