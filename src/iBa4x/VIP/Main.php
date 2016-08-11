@@ -14,11 +14,11 @@ use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as T;
 
 class Main extends PluginBase implements Listener{
-  public function onEneble(){
+  public function onEnable(){
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
     $this->getLogger()->info(T::GREEN . "By iBa4x");
-    $this->seveDefaultConfig();
-    $this->getResource("Config.yml");
+    $this->saveResource("Config.yml");
+    @mkdir($this->getDataFolder());
   }
   public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
     switch($cmd->getName()){
@@ -90,7 +90,7 @@ class Main extends PluginBase implements Listener{
           $level = $this->getConfig()->get("Level");
           $player = $event->getPlayer();
           if($player->hasPermission("vip1b.move.vip")){
-            $player->sendPopup(T::YELLOW . "Welcom" . $player->getName());
+            $player->sendPopup(T::YELLOW . "Welcom Room VIP " . T::GREEN . $player->getName());
           }else{
             $player->teleport(new Vector3($x, $y+1, $z, $level));
             $player->sendPopup(T::YELLOW . "$pop");
@@ -101,6 +101,6 @@ class Main extends PluginBase implements Listener{
     }
   }
   public function onDisable(){
-    $this->getConfig->save();
+    $this->getConfig()->save();
   }
 }
