@@ -72,7 +72,7 @@ class Main extends PluginBase implements Listener{
           $level = $this->getConfig()->get("Level");
           $player = $event->getPlayer();
           if($player->hasPermission("vip1b.move.vip")){
-            $player->sendPopup(T::YELLOW . "Welcom Room VIP " . T::GREEN . $player->getName());
+            $player->sendPopup(T::YELLOW . "Welcome Room VIP " . T::GREEN . $player->getName());
           }else{
             $player->teleport(new Vector3($x, $y+1, $z, $level));
             $player->sendPopup(T::YELLOW . "$pop");
