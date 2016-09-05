@@ -4,101 +4,70 @@ namespace iBa4x\VIP;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
-use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerMoveEvent;
-use pocketmine\level\Level;
 use pocketmine\math\Vector3;
-use pocketmine\utils\Config;
-use pocketmine\utils\TextFormat as T;
-
+use pocketmine\utils\TextFormat;
 class Main extends PluginBase implements Listener{
+  public $permission = "vip1b.area.vip";
   public function onEnable(){
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
-    $this->getLogger()->info(T::GREEN . "By iBa4x");
-    $this->saveResource("Config.yml");
+    $this->getLogger()->info(TextFormat::GREEN . "By iBa4x");
     @mkdir($this->getDataFolder());
   }
   public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
     switch($cmd->getName()){
-      case "sbb":
-        if($sender->hasPermission("vip1b.command.sbb")){
-          $x = $sender->getFloorX();
-          $y = $sender->getFloorY();
-          $z = $sender->getFloorZ();
-          $level = $sender->getLevel()->getName();
-          
-          $this->getConfig()->set("X", $x);
-          $this->getConfig()->set("Y", $y);
-          $this->getConfig()->set("Z", $z);
-          $this->getConfig()->set("Level", $level);
-          $this->getConfig()->save();
-          $sender->sendMessage("New set Block Back Player do not have VIP");
-        }
-      break;
-      case "sbr":
-        if($sender->hasPermission("vip1b.command.sbr")){
-          $x = $sender->getFloorX();
-          $y = $sender->getFloorY();
-          $z = $sender->getFloorZ();
-          $level = $sender->getLevel()->getName();
-          
-          $this->getConfig()->set("XM", $x);
-          $this->getConfig()->set("YM", $y);
-          $this->getConfig()->set("ZM", $z);
-          $this->getConfig()->set("msg", "You do not have Permission");
-          $this->getConfig()->set("popup", " ");
-          $this->getConfig()->save();
-          $sender->sendMessage("New set Block Join VIP");
-          $sender->sendMessage(T::RED . "#Permission Join VIP");
-          $sender->sendMessage(T::YELLOW . "vip1b.move.vip");
-        }
-      break;
-    }
+    	case "vip1b":
+    		if($sender->isOp()){
+    			if(isset($args[0])){
+    				switch($args[0]){
+    					case "pos1":
+    						$x = $sender->getFloorX();
+    						$y = $sender->getFloorY();
+    						$z = $sender->getFloorZ();
+    						$this->getConfig()->set("x1", $x);
+    						$this->getConfig()->set("y1", $y);
+    						$this->getConfig()->set("z1", $z);
+    						$this->getConfig()->save();
+    						$sender->sendMessage(TextFormat::GREEN."- Pos1 set to: ($x, $y, $z)");
+    					return true;
+    					case "pos2":
+    						$x = $sender->getFloorX();
+    						$y = $sender->getFloorY();
+    						$z = $sender->getFloorZ();
+    						$this->getConfig()->set("x2", $x);
+    						$this->getConfig()->set("y2", $y);
+    						$this->getConfig()->set("z2", $z);
+    						$this->getConfig()->save();
+    						$sender->sendMessage(TextFormat::GREEN."- Pos2 set to: ($x, $y, $z)");
+    					return true;
+    					case "permission":
+    						$sender->sendMessage(TextFormat::YELLOW."- $permission");
+    					return true;
+    				}
+    			}
+    		}
+    	}
+  }
+  public function isInside(Vector3 $pp, Vector3 $p1, Vector3 $p2){
+	return ((min($p1->getX(),$p2->getX()) <= $pp->getX()) && (max($p1->getX(),$p2->getX()) >= $pp->getX()) && (min($p1->getY(),$p2->getY()) <= $pp->getY()) && (max($p1->getY(),$p2->getY()) >= $pp->getY()) && (min($p1->getZ(),$p2->getZ()) <= $pp->getZ()) && (max($p1->getZ(),$p2->getZ()) >= $pp->getZ()));
   }
   public function onMove(PlayerMoveEvent $event){
-    $XM = $this->getConfig()->get("XM");
-    $YM = $this->getConfig()->get("YM");
-    $ZM = $this->getConfig()->get("ZM");
-    $msg = $this->getConfig()->get("msg");
-    $pop = $this->getConfig()->get("popup");
-    if($event->getTo()->getFloorX() === $XM){
-      if($event->getTo()->getFloorY() === $YM){
-        if($event->getTo()->getFloorZ() === $ZM){
-          $x = $this->getConfig()->get("X");
-          $y = $this->getConfig()->get("Y");
-          $z = $this->getConfig()->get("Z");
-          $level = $this->getConfig()->get("Level");
-          $player = $event->getPlayer();
-          if($player->hasPermission("vip1b.move.vip")){
-            $player->sendPopup(T::YELLOW . "Welcome Room VIP " . T::GREEN . $player->getName());
-          }else{
-            $player->teleport(new Vector3($x, $y+1, $z, $level));
-            $player->sendPopup(T::YELLOW . "$pop");
-            $player->sendMessage(T::RED . "$msg");
-          }
-        }
-      }
-    }
-    if($event->getTo()->getFloorX() === $XM){
-      if($event->getTo()->getFloorY() === $YM+1){
-        if($event->getTo()->getFloorZ() === $ZM){
-          $x = $this->getConfig()->get("X");
-          $y = $this->getConfig()->get("Y");
-          $z = $this->getConfig()->get("Z");
-          $level = $this->getConfig()->get("Level");
-          $player = $event->getPlayer();
-          if($player->hasPermission("vip1b.move.vip")){
-            $player->sendPopup(T::YELLOW . "Welcom Room VIP " . T::GREEN . $player->getName());
-          }else{
-            $player->teleport(new Vector3($x, $y+1, $z, $level));
-            $player->sendPopup(T::YELLOW . "$pop");
-            $player->sendMessage(T::RED . "$msg");
-          }
-        }
-      }
-    }
+	$player = $event->getPlayer();
+	$x1 = $this->getConfig()->get("x1");
+	$z1 = $this->getConfig()->get("z1");
+	$y1 = $this->getConfig()->get("y1");
+	$x2 = $this->getConfig()->get("x2");
+	$y2 = $this->getConfig()->get("y2");
+	$z2 = $this->getConfig()->get("z2");
+	if($this->isInside($player,new Vector3($x1,$y1,$z1),new Vector3($x2,$y2,$z2))){
+		if(!$player->hasPermission($permission)){
+			$spawn = $this->getServer()->getDefaultLevel()->getSafeSpawn();
+			$player->teleport(new Vector3($spawn->getX(),$spawn->getY(),$spawn->getZ()));
+			$player->sendMessage(TextFormat::RED."You do not have permission to join area");
+		}
+	}
   }
   public function onDisable(){
     $this->getConfig()->save();
