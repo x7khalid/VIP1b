@@ -35,9 +35,11 @@ class Main extends PluginBase implements Listener{
     						$x = $sender->getFloorX();
     						$y = $sender->getFloorY();
     						$z = $sender->getFloorZ();
+    						$level = $sender->getLevel()->getName();
     						$this->getConfig()->set("x2", $x);
     						$this->getConfig()->set("y2", $y);
     						$this->getConfig()->set("z2", $z);
+    						$this->getConfig()->set("Level", $level);
     						$this->getConfig()->save();
     						$sender->sendMessage(TextFormat::GREEN."- Pos2 set to: ($x, $y, $z)");
     					return true;
@@ -60,7 +62,8 @@ class Main extends PluginBase implements Listener{
 	$x2 = $this->getConfig()->get("x2");
 	$y2 = $this->getConfig()->get("y2");
 	$z2 = $this->getConfig()->get("z2");
-	if($this->isInside($player,new Vector3($x1,$y1,$z1),new Vector3($x2,$y2,$z2))){
+	$level = $this->getConfig()->get("Level");
+	if($this->isInside($player,new Vector3($x1,$y1,$z1,$level),new Vector3($x2,$y2,$z2,$level))){
 		if(!$player->hasPermission("vip1b.area.vip")){
 			$spawn = $this->getServer()->getDefaultLevel()->getSafeSpawn();
 			$player->teleport(new Vector3($spawn->getX(),$spawn->getY(),$spawn->getZ()));
