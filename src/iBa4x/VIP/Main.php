@@ -1,6 +1,6 @@
 <?php
 namespace iBa4x\VIP;
-#this plugin by iBa4x
+# this plugin by iBa4x
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
