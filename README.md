@@ -1,6 +1,5 @@
 # VIP1b
-- PoketMine | Room VIP Permission
+- PoketMine | set area vip
 - Usage:
-- /sbb : set teleport player do not have vip
-- /sbr : set block join room
+- /vip1b : <pos1/pos2/permission>
 - Download : https://www.imagicalmine.net/community/plugins/vip1b.546/
