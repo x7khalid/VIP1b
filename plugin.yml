@@ -1,7 +1,7 @@
 name: VIP1b
 main: iBa4x\VIP\Main
 version: 2.0.0
-api: [2.0.0]
+api: [2.0.0, 3.0.0]
 auther: iBa4x
 website: https://github.com/iBa4x/VIP1b
 
